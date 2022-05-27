@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
-import Counter from './components/Counter/Counter';
+import ItemListContainer from './components/ItemListContainer/ItemListContainer';
+import Navbar from './components/Navbar/Navbar';
 
 function App() {
   return (
@@ -21,7 +22,8 @@ function App() {
       
       </header> */}
 
-    <Counter title="Contador React" initialValue={0} stock={10}/>
+    <Navbar/>
+    <ItemListContainer greeting="Bienvenidos a e-Fit"/>
 
     </div>
   );
