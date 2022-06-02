@@ -1,5 +1,5 @@
 
-import '/Users/cota/Documents/React/e-fit/src/components/Navbar/Navbar.css'
+import '../Navbar/Navbar.css'
 import CardWidget from '../CardWidget/CardWidget'
 import React from 'react'
 
