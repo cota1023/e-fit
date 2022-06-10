@@ -1,26 +1,72 @@
 import React from "react"
 import { useEffect, useState } from "react"
 import '../ItemListContainer/ItemListContainer.css'
-import { getProducts } from "../asyncmock"
+import { getProducts, getProductsByCategory, getProductsByName } from "../asyncmock"
 import ItemList from "../ItemList/ItemList"
+import { useParams } from "react-router-dom"
 
 const ItemListContainer = ({ greeting }) => {
-    
+
     const [products, setProducts] = useState([])
-    
+    const [input, setInput] = useState("")
+    const [isLoading, setIsLoading] = useState(true)
+    const {category, name} = useParams()
+
     useEffect(() => {
-        getProducts()
+        setIsLoading(true)
+
+        if(!category){
+            getProducts()
             .then(response => {
                 setProducts(response)
             })
-    }, [])
+            .catch(err=> {console.log(err)})
+            .finally(()=>{setIsLoading(false)})
+        }else{
+            getProductsByCategory(category)
+            .then(prods=>{
+                setProducts(prods)
+            })
+            .catch(err=>{console.log(err)})
+            .finally(()=>{setIsLoading(false)})
+    
+        }
+        
+    }, [category])
 
-    console.log(products)
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        getProductsByName(input)
+        .then(response =>{
+            setProducts(response)
+        })
+        .catch(err=>{console.log(err)})
+            .finally(()=>{setIsLoading(false)})
 
+    }
+    
+    
+    if(isLoading){
+        return(
+            <>
+            <div className="cointainerSpinner">
+            <div className='spinner'></div>
+            <h3>Cargando...</h3>
+            </div>
+            
+            </>
+            
+            
+        )
+    }
 
     return (
         <div>
             <h2 className="title">{greeting}</h2>
+            <form onSubmit={handleSubmit} >
+                <input type='text' value={input} onChange={(e) => setInput(e.target.value)} />
+                <button type='submit'>Buscar</button>
+            </form>
             <ItemList products={products} />
         </div>
 
