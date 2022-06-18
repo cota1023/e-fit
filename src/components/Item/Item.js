@@ -9,8 +9,7 @@ const Item = ({ img, name, price, id }) => {
             <div className="container">
                 <h4><b>{name}</b></h4>
                 <h4><b className="priceText">${price}</b></h4>
-                <Link to={`/detail/${id}`} className='css-button-3d--red'>Más info</Link>
-                <button className='css-button-3d--yellow'>Comprar</button>
+                <Link to={`/detail/${id}`} className='btn btn-danger'>Más info</Link>
             </div>
         </div>
 

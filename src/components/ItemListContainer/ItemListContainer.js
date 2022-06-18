@@ -4,6 +4,7 @@ import '../ItemListContainer/ItemListContainer.css'
 import { getProducts, getProductsByCategory, getProductsByName } from "../asyncmock"
 import ItemList from "../ItemList/ItemList"
 import { useParams } from "react-router-dom"
+import Carrousel from "../Carrousel/Carrousel"
 
 const ItemListContainer = ({ greeting }) => {
 
@@ -61,13 +62,14 @@ const ItemListContainer = ({ greeting }) => {
     }
 
     return (
-        <div>
+        <div className="container-fluid">
             <h2 className="title">{greeting}</h2>
             <form onSubmit={handleSubmit} >
                 <input type='text' value={input} onChange={(e) => setInput(e.target.value)} />
                 <button type='submit'>Buscar</button>
             </form>
             <ItemList products={products} />
+            <Carrousel/>
         </div>
 
     )
