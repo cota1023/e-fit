@@ -7,13 +7,10 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import ItemDetail from './components/ItemDetail/ItemDetail';
 import ItemDetailContainer from './components/ItemDetailCointainer/ItemDetailContainer';
 import { CartProvider } from './context/CartContext';
+import CartToOrder from './components/CartToOrder/CartToOrder';
 
 function App() {
-  
-
-  
-  
-  
+    
   return (
     <div className="App">
       <CartProvider>
@@ -23,7 +20,7 @@ function App() {
           <Route path='/' element={<ItemListContainer greeting="Bienvenidos a e-Fit"/>} />
           <Route path='/detail/:productId' element={<ItemDetailContainer/>}/>
           <Route path='/category/:category' element={<ItemListContainer />} />
-          <Route path='/cart' element={<h1>CART</h1>} />
+          <Route path='/cart' element={<CartToOrder/>} />
         </Routes>
       </BrowserRouter>
       </CartProvider>
