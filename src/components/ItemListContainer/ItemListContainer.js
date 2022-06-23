@@ -5,59 +5,83 @@ import { getProducts, getProductsByCategory, getProductsByName } from "../asyncm
 import ItemList from "../ItemList/ItemList"
 import { useParams } from "react-router-dom"
 import Carrousel from "../Carrousel/Carrousel"
+import { getDocs, collection, query, where } from "firebase/firestore"
+import { db } from "../../services/firebase"
 
 const ItemListContainer = ({ greeting }) => {
 
     const [products, setProducts] = useState([])
     const [input, setInput] = useState("")
     const [isLoading, setIsLoading] = useState(true)
-    const {category, name} = useParams()
+    const { category, name } = useParams()
 
     useEffect(() => {
-        setIsLoading(true)
-
-        if(!category){
-            getProducts()
-            .then(response => {
-                setProducts(response)
-            })
-            .catch(err=> {console.log(err)})
-            .finally(()=>{setIsLoading(false)})
-        }else{
-            getProductsByCategory(category)
-            .then(prods=>{
-                setProducts(prods)
-            })
-            .catch(err=>{console.log(err)})
-            .finally(()=>{setIsLoading(false)})
-    
-        }
         
+        setIsLoading(true)
+        
+        const collectionRef = category 
+        
+        ? (query(collection(db,'products'), where('category','==',category)))
+        : (collection(db, "products"))
+        
+        getDocs(collectionRef)
+            .then(resp => {
+                const productsFirebase = resp.docs.map(doc => {
+                    return { id: doc.id, ...doc.data() }
+                })
+                setProducts(productsFirebase)
+            }).catch(error => { console.log(error) })
+            .finally(
+                ()=>{setIsLoading(false)}
+            )
+
+
+
+        // if(!category){
+        //     getProducts()
+        //     .then(response => {
+        //         setProducts(response)
+        //     })
+        //     .catch(err=> {console.log(err)})
+        //     .finally(()=>{setIsLoading(false)})
+        // }else{
+        //     getProductsByCategory(category)
+        //     .then(prods=>{
+        //         setProducts(prods)
+        //     })
+        //     .catch(err=>{console.log(err)})
+        //     .finally(()=>{setIsLoading(false)})
+
+        // }
+
+
+
+
     }, [category])
 
     const handleSubmit = (e) => {
         e.preventDefault()
         getProductsByName(input)
-        .then(response =>{
-            setProducts(response)
-        })
-        .catch(err=>{console.log(err)})
-            .finally(()=>{setIsLoading(false)})
+            .then(response => {
+                setProducts(response)
+            })
+            .catch(err => { console.log(err) })
+            .finally(() => { setIsLoading(false) })
 
     }
-    
-    
-    if(isLoading){
-        return(
+
+
+    if (isLoading) {
+        return (
             <>
-            <div className="cointainerSpinner">
-            <div className='spinner'></div>
-            <h3>Cargando...</h3>
-            </div>
-            
+                <div className="cointainerSpinner">
+                    <div className='spinner'></div>
+                    <h3>Cargando...</h3>
+                </div>
+
             </>
-            
-            
+
+
         )
     }
 
@@ -69,7 +93,7 @@ const ItemListContainer = ({ greeting }) => {
                 <button type='submit'>Buscar</button>
             </form>
             <ItemList products={products} />
-            <Carrousel/>
+            <Carrousel />
         </div>
 
     )
