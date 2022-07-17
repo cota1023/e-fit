@@ -11,10 +11,9 @@ const CustomerForm = () => {
 
     const { cart, getCartTotalAmount, clearCart } = useContext(CartContext)
 
-    const { register, handleSubmit } = useForm()
+    const { register, handleSubmit, formState: {errors} } = useForm()
 
     const navigate = useNavigate()
-
 
     const onSubmit = (data) => {
         console.log("HOla")
@@ -101,20 +100,29 @@ const CustomerForm = () => {
                 <div className="mb-3 d-flex flex-column align-items-start" >
                     <label for="inputName" className="form-label">Nombre: </label>
                     <input type="text" className="form-control" id="inputName" {...register('Nombre', {
-                        required: true
+                        required: true,
+                        maxLength: 50
                     })} />
                 </div>
                 <div className="mb-3 d-flex flex-column align-items-start" >
                     <label for="inputAddress" className="form-label">Dirección: </label>
-                    <input type="text" className="form-control" id="inputAddress" {...register('Direccion')} />
+                    <input type="text" className="form-control" id="inputAddress" {...register('Direccion',  {
+                        required: true,
+                        maxLength: 100
+                    })} />
                 </div>
                 <div className="mb-3 d-flex flex-column align-items-start" >
                     <label for="inputPhone" className="form-label">Celular: </label>
-                    <input type="text" className="form-control" id="inputPhone" {...register('Celular')} />
+                    <input type="text" className="form-control" id="inputPhone" {...register('Celular',  {
+                        required: true
+                    })} />
                 </div>
                 <div className="mb-3 d-flex flex-column align-items-start" >
                     <label for="inputCreditCard" className="form-label">Tarjeta: </label>
-                    <input type="number" className="form-control" id="inputCreditCard" max="9999999999999999" {...register('Tarjeta')} />
+                    <input type="number" className="form-control" id="inputCreditCard" {...register('Tarjeta',  {
+                        required: true,
+                        maxLength: 16
+                    })} />
                 </div>
                 <div className='container'>
                 <button type='submit' className="btn btn-success pe">Realizar Compra</button>

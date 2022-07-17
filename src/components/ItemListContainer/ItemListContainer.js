@@ -52,16 +52,23 @@ const ItemListContainer = ({ greeting }) => {
         )
     }
 
+    
     return (
         <div className="container-fluid mt-3">
             <h2 className="title mt-5 text-uppercase fw-bold">{greeting}</h2>
-            <h5 className="pt-5"> Somos la mejor tienda de productos para equipar tu gimnasio / box. Contamos con asesorías personalizadas para recomendarte la mejor opción en base a tu presupuesto.</h5>
+            
+            { !category ? 
+            <h5 className="pt-5"> Somos la mejor tienda de productos para equipar tu gimnasio / box. Contamos con asesorías personalizadas para recomendarte la mejor opción en base a tu presupuesto.</h5> 
+             : <h2 className="text-uppercase fw-bold">{category}</h2>}
+            
             {/* <form onSubmit={handleSubmit} >
                 <input type='text' value={input} onChange={(e) => setInput(e.target.value)} />
                 <button type='submit'>Buscar</button>
             </form> */}
             <ItemList products={products} />
-            <Carrousel />
+            {!category ? <Carrousel /> : <br></br> }
+            
+            
         </div>
 
     )

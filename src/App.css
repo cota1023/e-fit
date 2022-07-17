@@ -36,3 +36,7 @@
     transform: rotate(360deg);
   }
 }
+
+.dropdown-item.active{
+  background-color: #dc3545 !important
+}
