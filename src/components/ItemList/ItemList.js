@@ -1,7 +1,7 @@
 import Item from "../Item/Item"
 import '../ItemList/ItemList.css'
 import React from "react"
-import Footer from "../Footer/Footer"
+
 
 const ItemList = ({ products }) => {
 

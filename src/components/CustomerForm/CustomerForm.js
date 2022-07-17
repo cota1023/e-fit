@@ -11,12 +11,11 @@ const CustomerForm = () => {
 
     const { cart, getCartTotalAmount, clearCart } = useContext(CartContext)
 
-    const { register, handleSubmit, formState: {errors} } = useForm()
+    const { register, handleSubmit} = useForm()
 
     const navigate = useNavigate()
 
     const onSubmit = (data) => {
-        console.log("HOla")
 
         const date = new Date().toISOString();
 
@@ -49,21 +48,17 @@ const CustomerForm = () => {
 
                     if (dataDoc.stock >= prodQuantity) {
                         batch.update(doc.ref, { stock: dataDoc.stock - prodQuantity })
-                        console.log("paso1")
                     } else {
                         productsOutOfStock.push({ id: doc.id, ...dataDoc })
-                        console.log("paso2")
                     }
                 })
             })
             .then(() => {
                 if (productsOutOfStock.length === 0) {
                     const collectionRef = collection(db, 'orders')
-                    console.log("paso3")
                     return addDoc(collectionRef, objOrder)
 
                 } else {
-                    console.log("paso4")
                     return Promise.reject({ type: 'out_of_stock', products: productsOutOfStock })
                 }})
             .then(({ id }) => {

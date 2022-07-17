@@ -41,9 +41,6 @@ const Counter = ({ initial, stock, onAdd }) => {
         }
     }
 
-    const resetQ = () => {
-        setCount(initial)
-    }
 
     return (
         <>

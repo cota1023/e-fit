@@ -10,9 +10,8 @@ import { db } from "../../services/firebase"
 const ItemListContainer = ({ greeting }) => {
 
     const [products, setProducts] = useState([])
-    const [input, setInput] = useState("")
     const [isLoading, setIsLoading] = useState(true)
-    const { category, name } = useParams()
+    const { category} = useParams()
 
     useEffect(() => {
         
@@ -60,11 +59,7 @@ const ItemListContainer = ({ greeting }) => {
             { !category ? 
             <h5 className="pt-5"> Somos la mejor tienda de productos para equipar tu gimnasio / box. Contamos con asesorías personalizadas para recomendarte la mejor opción en base a tu presupuesto.</h5> 
              : <h2 className="text-uppercase fw-bold">{category}</h2>}
-            
-            {/* <form onSubmit={handleSubmit} >
-                <input type='text' value={input} onChange={(e) => setInput(e.target.value)} />
-                <button type='submit'>Buscar</button>
-            </form> */}
+
             <ItemList products={products} />
             {!category ? <Carrousel /> : <br></br> }
             

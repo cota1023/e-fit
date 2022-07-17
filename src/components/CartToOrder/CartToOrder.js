@@ -3,9 +3,6 @@ import CartContext from '../../context/CartContext'
 import OrderItemDetail from '../OrderItemDetail/OrderItemDetail'
 import { Link } from 'react-router-dom'
 import CustomerForm from '../CustomerForm/CustomerForm'
-import {addDoc, collection} from 'firebase/firestore'
-import {db} from '../../services/firebase/index'
-import CustomerContext from '../../context/CustomerContext'
 
 
 const CartToOrder = () => {

@@ -11,8 +11,6 @@ export const CustomerProvider = ({ children }) => {
     const handleCustomerData = (customerData) => {
 
         setCustomer(customerData)
-        console.log(customer)
-
     }
 
     return (
