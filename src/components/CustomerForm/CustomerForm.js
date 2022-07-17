@@ -5,13 +5,15 @@ import CartContext from '../../context/CartContext'
 import { addDoc, collection, writeBatch, getDocs, query, where, documentId } from 'firebase/firestore'
 import { db } from '../../services/firebase/index'
 import Swal from 'sweetalert2'
-
+import { Navigate, useNavigate} from 'react-router-dom'
 
 const CustomerForm = () => {
 
-    const { cart, getCartTotalAmount } = useContext(CartContext)
+    const { cart, getCartTotalAmount, clearCart } = useContext(CartContext)
 
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit } = useForm()
+
+    const navigate = useNavigate()
 
 
     const onSubmit = (data) => {
@@ -74,15 +76,24 @@ const CustomerForm = () => {
                     icon: 'success',
                     title: `Tu orden fue creada correctamente con el id:${id}`,
                     showConfirmButton: false,
-                    timer: 1500
+                    timer: 2500
                   })
             }).catch(error => {
                 if (error.type === 'out_of_stock') {
-                    console.log("Hay productos sin stock")
+                    Swal.fire(
+                        'No pudimos procesar tu compra',
+                        'Hay algunos productos que no tienen stock',
+                        'error'
+                      )
                 } else {
                     console.log(error)
                 }
-            })
+            }).finally(()=>{
+                clearCart()
+                navigate("/")
+            }
+
+            )
     }
 
 
@@ -107,7 +118,7 @@ const CustomerForm = () => {
                     <label for="inputCreditCard" className="form-label">Tarjeta: </label>
                     <input type="number" className="form-control" id="inputCreditCard" max="9999999999999999" {...register('Tarjeta')} />
                 </div>
-                {/* <button onClick={() => clearCart()} className="btn btn-secondary">Limpiar carrito</button> */}
+                <button onClick={() => clearCart()} className="btn btn-secondary">Anular Compra</button>
                 <button type='submit' className="btn btn-primary">Realizar Compra</button>
             </form>
         </div>

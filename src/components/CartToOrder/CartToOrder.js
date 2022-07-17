@@ -45,8 +45,6 @@ const CartToOrder = () => {
         <div>
           <h2>Todavía no hay productos en el carrito</h2>
           <Link to="/" className='btn btn-secondary'>Comprar!</Link>
-          <CustomerForm />
-          
         </div>
         
         : 
@@ -56,7 +54,7 @@ const CartToOrder = () => {
                 <OrderItemDetail product={cartProduct}/>  
               )}
               <h3>{`Total: ${getCartTotalAmount()}`} </h3>
-              <br></br>
+              <hr></hr>
               <CustomerForm />
           </div>
 
