@@ -5,14 +5,15 @@ import { Link } from 'react-router-dom'
 import CustomerForm from '../CustomerForm/CustomerForm'
 import {addDoc, collection} from 'firebase/firestore'
 import {db} from '../../services/firebase/index'
+import CustomerContext from '../../context/CustomerContext'
 
 
 const CartToOrder = () => {
 
   const { cart, getCartTotalAmount } = useContext(CartContext)
+  const { customer } = useContext(CustomerContext)
 
   const handleCreateOrder = () =>{
-
 
     const objOrder = {
       buyer: {
@@ -24,6 +25,15 @@ const CartToOrder = () => {
       items: cart,
       total: getCartTotalAmount
     }
+    const collectionRef = collection(db,"orders")
+    
+    addDoc(collectionRef, objOrder).then(({id}) => {
+      console.log(id)
+    })
+
+
+
+
   }
   
   const cartEmpty = cart.length === 0 ? true : false
@@ -36,6 +46,7 @@ const CartToOrder = () => {
           <h2>Todavía no hay productos en el carrito</h2>
           <Link to="/" className='btn btn-secondary'>Comprar!</Link>
           <CustomerForm />
+          
         </div>
         
         : 

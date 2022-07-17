@@ -12,19 +12,20 @@ function App() {
     
   return (
     <div className="App">
+          <CustomerProvider>
       <CartProvider>
       <BrowserRouter>
        <Navbar/>
-       <CustomerProvider>
+  
         <Routes>
           <Route path='/' element={<ItemListContainer greeting="Bienvenidos a e-Fit"/>} />
           <Route path='/detail/:productId' element={<ItemDetailContainer/>}/>
           <Route path='/category/:category' element={<ItemListContainer />} />
           <Route path='/cart' element={<CartToOrder/>} />
         </Routes>
-        </CustomerProvider>
       </BrowserRouter>
       </CartProvider>
+      </CustomerProvider>
 
     
     {/* <Counter initial={0} stock={30} onAdd={handleAdd}/> */}

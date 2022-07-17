@@ -26,14 +26,14 @@ export const CartProvider = ({ children }) => {
     }
 
     const removeItem = (id) => {
-        const cartWithoutProduct = cart.filter(prod => prod.id !== id) 
+        const cartWithoutProduct = cart.filter(prod => prod.id !== id)
         setCart(cartWithoutProduct)
     }
 
     const isInCart = (id) => {
         return cart.some(prod => prod.id === id)
     }
-    
+
 
     const clearCart = () => {
         setCart([])
@@ -43,7 +43,7 @@ export const CartProvider = ({ children }) => {
         let totalAmount = 0
 
         cart.forEach(prod => {
-        
+
             totalAmount += prod.price * prod.count
         })
 

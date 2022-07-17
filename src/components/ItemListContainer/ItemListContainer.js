@@ -1,7 +1,6 @@
 import React from "react"
 import { useEffect, useState } from "react"
 import '../ItemListContainer/ItemListContainer.css'
-import { getProducts, getProductsByCategory, getProductsByName } from "../asyncmock"
 import ItemList from "../ItemList/ItemList"
 import { useParams } from "react-router-dom"
 import Carrousel from "../Carrousel/Carrousel"
@@ -59,16 +58,16 @@ const ItemListContainer = ({ greeting }) => {
 
     }, [category])
 
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        getProductsByName(input)
-            .then(response => {
-                setProducts(response)
-            })
-            .catch(err => { console.log(err) })
-            .finally(() => { setIsLoading(false) })
+    // const handleSubmit = (e) => {
+    //     e.preventDefault()
+    //     getProductsByName(input)
+    //         .then(response => {
+    //             setProducts(response)
+    //         })
+    //         .catch(err => { console.log(err) })
+    //         .finally(() => { setIsLoading(false) })
 
-    }
+    // }
 
 
     if (isLoading) {
@@ -88,10 +87,10 @@ const ItemListContainer = ({ greeting }) => {
     return (
         <div className="container-fluid">
             <h2 className="title">{greeting}</h2>
-            <form onSubmit={handleSubmit} >
+            {/* <form onSubmit={handleSubmit} >
                 <input type='text' value={input} onChange={(e) => setInput(e.target.value)} />
                 <button type='submit'>Buscar</button>
-            </form>
+            </form> */}
             <ItemList products={products} />
             <Carrousel />
         </div>
