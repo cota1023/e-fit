@@ -1,9 +1,10 @@
 .cardList {
 
     display: flex;
-    justify-content: space-around;
-    flex-direction: row;
-    gap: 20px;
+    width: 90%;
+    gap: 40px;
+    margin: auto;
+    padding: 40px 0;
     flex-wrap: wrap;
-    padding: 30px;
+
 }

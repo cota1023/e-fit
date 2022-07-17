@@ -5,7 +5,7 @@ import CartContext from '../../context/CartContext'
 import { addDoc, collection, writeBatch, getDocs, query, where, documentId } from 'firebase/firestore'
 import { db } from '../../services/firebase/index'
 import Swal from 'sweetalert2'
-import { Navigate, useNavigate} from 'react-router-dom'
+import { useNavigate} from 'react-router-dom'
 
 const CustomerForm = () => {
 
@@ -71,6 +71,7 @@ const CustomerForm = () => {
                 }})
             .then(({ id }) => {
                 batch.commit()
+                clearCart()
                 Swal.fire({
                     position: 'top-end',
                     icon: 'success',
@@ -89,7 +90,6 @@ const CustomerForm = () => {
                     console.log(error)
                 }
             }).finally(()=>{
-                clearCart()
                 navigate("/")
             }
 

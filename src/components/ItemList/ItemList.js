@@ -5,8 +5,10 @@ import React from "react"
 const ItemList = ({products})=>{
 
     return(
-        <div className="cardList">
+        <div className="container">
+            <div className="cardList">
             {products.map(prod=> <Item key={prod.id} {...prod} />)}
+            </div>
         </div>
             
         

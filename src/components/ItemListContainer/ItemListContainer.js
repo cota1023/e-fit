@@ -35,39 +35,7 @@ const ItemListContainer = ({ greeting }) => {
             )
 
 
-
-        // if(!category){
-        //     getProducts()
-        //     .then(response => {
-        //         setProducts(response)
-        //     })
-        //     .catch(err=> {console.log(err)})
-        //     .finally(()=>{setIsLoading(false)})
-        // }else{
-        //     getProductsByCategory(category)
-        //     .then(prods=>{
-        //         setProducts(prods)
-        //     })
-        //     .catch(err=>{console.log(err)})
-        //     .finally(()=>{setIsLoading(false)})
-
-        // }
-
-
-
-
     }, [category])
-
-    // const handleSubmit = (e) => {
-    //     e.preventDefault()
-    //     getProductsByName(input)
-    //         .then(response => {
-    //             setProducts(response)
-    //         })
-    //         .catch(err => { console.log(err) })
-    //         .finally(() => { setIsLoading(false) })
-
-    // }
 
 
     if (isLoading) {

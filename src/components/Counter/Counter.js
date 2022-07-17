@@ -3,6 +3,8 @@ import React from "react"
 import '../Counter/Counter.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons'
+import Swal from 'sweetalert2'
+
 
 
 const Counter = ({ initial, stock, onAdd }) => {
@@ -19,7 +21,11 @@ const Counter = ({ initial, stock, onAdd }) => {
         if (count < stock) {
             setCount(count + 1)
         } else {
-            alert('No se puede agregar esa cantidad')
+            Swal.fire(
+                'No hay mas stock disponible',
+                'No tenemos esa cantidad. Intentá eligiendo menos unidades',
+                'error'
+              )
         }
     }
 
@@ -27,7 +33,11 @@ const Counter = ({ initial, stock, onAdd }) => {
         if (count > 0) {
             setCount(count - 1)
         } else {
-            alert('No se pueden quitar mas unidades')
+            Swal.fire(
+                'Epa!',
+                'No podés seleccionar menos unidades',
+                'error'
+              )
         }
     }
 
