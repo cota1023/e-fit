@@ -33,8 +33,6 @@ const CustomerForm = () => {
             total: getCartTotalAmount()
         }
 
-        console.log(objOrder)
-
         const productsOutOfStock = []
 
         const batch = writeBatch(db)
@@ -118,8 +116,12 @@ const CustomerForm = () => {
                     <label for="inputCreditCard" className="form-label">Tarjeta: </label>
                     <input type="number" className="form-control" id="inputCreditCard" max="9999999999999999" {...register('Tarjeta')} />
                 </div>
-                <button onClick={() => clearCart()} className="btn btn-secondary">Anular Compra</button>
-                <button type='submit' className="btn btn-primary">Realizar Compra</button>
+                <div className='container'>
+                <button type='submit' className="btn btn-success pe">Realizar Compra</button>
+                </div>    
+                <div className='container pt-3'>
+                <button onClick={() => clearCart()} className="btn btn-danger btn-sm">Anular Compra</button>
+                </div>
             </form>
         </div>
 

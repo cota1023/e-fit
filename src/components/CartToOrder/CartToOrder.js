@@ -11,31 +11,7 @@ import CustomerContext from '../../context/CustomerContext'
 const CartToOrder = () => {
 
   const { cart, getCartTotalAmount } = useContext(CartContext)
-  const { customer } = useContext(CustomerContext)
 
-  const handleCreateOrder = () =>{
-
-    const objOrder = {
-      buyer: {
-        name: "Carlos Ota",
-        phone: "11254654654",
-        address: "Direcciòn 123",
-        email: "mail@google.com"
-      },
-      items: cart,
-      total: getCartTotalAmount
-    }
-    const collectionRef = collection(db,"orders")
-    
-    addDoc(collectionRef, objOrder).then(({id}) => {
-      console.log(id)
-    })
-
-
-
-
-  }
-  
   const cartEmpty = cart.length === 0 ? true : false
   
   return (
@@ -53,8 +29,9 @@ const CartToOrder = () => {
             {cart.map(cartProduct=>
                 <OrderItemDetail product={cartProduct}/>  
               )}
-              <h3>{`Total: ${getCartTotalAmount()}`} </h3>
+              <h3 className='mt-5'>{`Total: $ ${getCartTotalAmount()}`} </h3>
               <hr></hr>
+              <h3>Para continuar con tu compra completá los siguientes datos:</h3>
               <CustomerForm />
           </div>
 

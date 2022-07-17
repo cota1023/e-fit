@@ -13,10 +13,8 @@ const ItemDetail = ({ id, name, img, price, description, stock }) => {
   const handleOnAdd = (count) => {
 
     if (count > 0) {
-      console.log(`Se agregaron ${count} unidades de ${name}`)
       addItem({ id, name, price, count })
       setQuantityAdded(count)
-      console.log(`quantityAdded:  ${quantityAdded}`)
     } else console.log("la cantidad es cero o menor -- no se agrega nada")
 
   }

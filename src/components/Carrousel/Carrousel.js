@@ -4,7 +4,7 @@ import '../Carrousel/Carrousel.css'
 const Carrousel = () => {
     return (
         <>
-        <div className='container'>
+        <div className='container mt-5'>
         <h3>Nos acompañan las siguientes marcas:</h3>
                     </div>
         <div className='row container-marcas'>

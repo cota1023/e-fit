@@ -51,12 +51,12 @@ const Counter = ({ initial, stock, onAdd }) => {
                 <button onClick={decrementQ}>
                     <FontAwesomeIcon icon={faAngleLeft} />
                 </button>
-                <h3> {count} </h3>
+                <h3 className="ps-2 pe-2"> {count} </h3>
                 <button onClick={incrementQ}>
                     <FontAwesomeIcon icon={faAngleRight} />
                 </button>
             </div>
-            <div>
+            <div className="container p-3">
                 <button className="btn btn-danger"
                 onClick={() => onAdd(count)}>Agregar al carrito</button>
             </div>
